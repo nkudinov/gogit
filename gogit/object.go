@@ -1,4 +1,4 @@
-package gitgo
+package gogit
 
 import (
 	"compress/zlib"
@@ -6,15 +6,16 @@ import (
 	"os"
 )
 
-func objectFromFile(filename string) (string, error) {
+func ObjectFromFile(filename string) (string, error) {
+
 	f, err := os.Open(filename)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 	defer f.Close()
 	r, err := zlib.NewReader(f)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 	// Читаем данные из zlib.Reader в виде среза байтов
 	compressedData, err := io.ReadAll(r)
